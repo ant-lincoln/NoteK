@@ -1,0 +1,47 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.NoteTest" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <item name="colorPrimary">@color/blue_700</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_200</item>
+        <item name="colorSecondaryVariant">@color/blue_700</item>
+        <item name="colorOnSecondary">@color/blue_200</item>
+        <item name="iconTint">@color/blue_200</item>
+        <item name="tintNavigationIcon">@color/blue_200</item>
+        <item name="hintTextColor">@color/blue_200</item>
+        <item name="colorControlActivated">@color/blue_200</item>
+
+        <item name="colorControlNormal">@color/blue_200</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorSecondaryVariant
+        </item>
+        <!-- Customize the action bar background color -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
+        <!-- Customize the toolbar background color -->
+        <item name="toolbarStyle">@style/MyToolbar</item>
+    </style>
+
+    <!-- Custom Action Bar style -->
+    <style name="MyActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="background">@color/blue_700</item>
+        <item name="titleTextColor">@color/blue_200</item>
+        <item name="android:textColor">@color/blue_200</item>
+        <item name="iconTint">@color/blue_200</item>
+        <item name="hintTextColor">@color/blue_200</item>
+        <item name="colorControlNormal">@color/blue_200</item>
+    </style>
+
+    <!-- Custom Toolbar style -->
+    <style name="MyToolbar" parent="Widget.Material3.Toolbar">
+        <item name="background">@color/blue_200</item>
+        <item name="titleTextColor">@color/blue_200</item>
+        <item name="android:textColor">@color/blue_200</item>
+        <item name="iconTint">@color/blue_200</item>
+        <item name="hintTextColor">@color/blue_200</item>
+        <item name="colorControlNormal">@color/blue_200</item>
+    </style>
+</resources>
