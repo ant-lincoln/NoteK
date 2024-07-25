@@ -1,8 +1,8 @@
 ![Screen_recording_20240725_161609 (1)](https://github.com/user-attachments/assets/ca7f6d01-be04-4fba-94a4-8f5f99886a94)
 
-#NOTEK
+# NOTEK
 
-###NoteK é um aplicativo de lista de tarefas (To-Do List) desenvolvido em Kotlin, que adota as melhores práticas de desenvolvimento Android para garantir uma experiência de usuário fluida e eficiente. O app implementa as seguintes funcionalidades chave:
+### NoteK é um aplicativo de lista de tarefas (To-Do List) desenvolvido em Kotlin, que adota as melhores práticas de desenvolvimento Android para garantir uma experiência de usuário fluida e eficiente. O app implementa as seguintes funcionalidades chave:
 
 Funcionalidades
 Arquitetura MVVM:
