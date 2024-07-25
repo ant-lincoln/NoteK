@@ -21,7 +21,7 @@ import com.seumelhorcaminho.produtividade.notetest.databinding.FragmentEditNoteB
 import com.seumelhorcaminho.produtividade.notetest.model.Note
 import com.seumelhorcaminho.produtividade.notetest.viewmodel.NoteViewModel
 
-class EditNoteFragment : Fragment(R.layout.fragment_edit_note), MenuProvider {
+class EditNoteFragment : Fragment(R.layout.fragment_edit_note) {
 
     private var editNoteBinding: FragmentEditNoteBinding? = null
     private val binding get() = editNoteBinding!!
@@ -42,9 +42,6 @@ class EditNoteFragment : Fragment(R.layout.fragment_edit_note), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
         notesViewModel = (activity as MainActivity).noteViewModel
         currentNote = args.note!!
 
@@ -58,41 +55,65 @@ class EditNoteFragment : Fragment(R.layout.fragment_edit_note), MenuProvider {
             if (noteTitle.isNotEmpty()) {
                 val note = Note(currentNote.id, noteTitle, noteDescription)
                 notesViewModel.updateNote(note)
-                view.findNavController().popBackStack(R.id.homeFragment, false)
-                Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
+//                view.findNavController().popBackStack(R.id.homeFragment, false)
+                Toast.makeText(context, "Nota atualizada", Toast.LENGTH_SHORT).show()
+                view.findNavController().navigate(
+                    R.id.action_editNoteFragment_to_homeFragment
+                )
 
             } else {
-                Toast.makeText(context, "Please, enter note title", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Entre com o título", Toast.LENGTH_SHORT).show()
             }
         }
+
+        val menuHost: MenuHost = requireActivity()
+//        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.edit_note_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_delete -> {
+                        deleteNote()
+//                        Toast.makeText(requireContext(), "Botão delete pressionado", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun deleteNote(){
         AlertDialog.Builder(requireActivity()).apply {
-            setTitle("Delete note")
-            setMessage("Do you want delete this note?")
-            setPositiveButton("Delete"){_,_ ->
+            setTitle("Excluir nota")
+            setMessage("Deseja excluir esta nota?")
+            setPositiveButton("Excluir"){_,_ ->
                 notesViewModel.deleteNote(currentNote)
-                Toast.makeText(context,"Note deleted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Nota excluída", Toast.LENGTH_SHORT).show()
                 view?.findNavController()?.popBackStack(R.id.homeFragment,false)
             }
-            setNegativeButton("Cancel", null)
+            setNegativeButton("Cancelar", null)
         }.create().show()
     }
 
-    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menu.clear()
-        menuInflater.inflate(R.menu.edit_note_menu, menu)
-    }
-
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return when(menuItem.itemId){
-            R.id.menu_delete -> {
-                deleteNote()
-                true
-            }else -> false
-        }
-    }
+//    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//        menu.clear()
+//        menuInflater.inflate(R.menu.edit_note_menu, menu)
+//    }
+//
+//    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//        return when(menuItem.itemId){
+//            R.id.menu_delete -> {
+//                deleteNote()
+//                true
+//            }else -> false
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
